@@ -4,10 +4,18 @@
  //@description To store list of cards in variable
 let cardList = document.getElementsByClassName('card');
 let cards=[...cardList];
+
 //@description To store deck of cards in a variable
 let deck=document.querySelector('.deck')
+
 //@description list for all open cards
 let open=[];
+
+//@description Counting number of Moves
+let count=0;
+//@description Accessing element that displays number of moves made by user
+let moves=document.querySelector(".moves");
+
 
 /*
  * Display the cards on the page
@@ -61,13 +69,15 @@ deck.addEventListener('click', openCard);
 //@Opening card logic
 function openCard(event){
   let ab=event.target;
-  if((ab.nodeName==='LI')&&(open.length<2)&&(!open.includes(ab))){
+  if((ab.nodeName ==='LI')&&(open.length<2)&&(!open.includes(ab))){
     ab.classList.add('open','show');
     open.push(ab);
+    countMoves();
   }
   if(open.length===2){
     cardMatch();
   }
+
 }
 
 //@description If cards match or not
@@ -84,4 +94,9 @@ function cardMatch(){
     open[1].classList.remove('match','show','open');
     open=[];
   }
+}
+
+function countMoves(){
+  count++;
+  moves.textContent=count;
 }
