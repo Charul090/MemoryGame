@@ -6,6 +6,9 @@ let cardList = document.getElementsByClassName('card');
 let cards=[...cardList];
 //@description To store deck of cards in a variable
 let deck=document.querySelector('.deck')
+//@description list for all open cards
+let open=[];
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -26,7 +29,7 @@ function start(){
   }
 }
 
-// Shuffle function from http://stackoverflow.com/a/2450976
+//@description Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -41,7 +44,6 @@ function shuffle(array) {
     return array;
 }
 
-
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -52,3 +54,34 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+//@description Eventlistener for card
+deck.addEventListener('click', openCard);
+
+//@Opening card logic
+function openCard(event){
+  let ab=event.target;
+  if((ab.nodeName==='LI')&&(open.length<2)&&(!open.includes(ab))){
+    ab.classList.add('open','show');
+    open.push(ab);
+  }
+  if(open.length===2){
+    cardMatch();
+  }
+}
+
+//@description If cards match or not
+function cardMatch(){
+  const ac=open[0].firstElementChild;
+  const ab=open[1].firstElementChild;
+  if(ac.className === ab.className){
+    open[0].classList.add('match');
+    open[1].classList.add('match');
+    open=[];
+  }
+  else {
+    open[0].classList.remove('match','show','open');
+    open[1].classList.remove('match','show','open');
+    open=[];
+  }
+}
