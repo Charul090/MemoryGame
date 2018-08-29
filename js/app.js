@@ -19,6 +19,17 @@ let moves=document.querySelector('.moves');
 //@description Reset button
 let restart=document.querySelector('.restart');
 
+//@description Number cards matched
+let matched=0;
+
+//@description To access popup
+let pop = document.getElementById('pop');
+
+//@description To access x that closes the popup
+let close = document.querySelector('.close');
+//@description Accessing elemtent to display moves in POPUP
+let movess=document.querySelector('.moves-2');
+
 
 /*
  * Display the cards on the page
@@ -86,14 +97,16 @@ function openCard(event){
 
 }
 
-//@description If cards match or not
+//@description If cards matches or not checking functionality
 function cardMatch(){
-  const ac=open[0].firstElementChild;
-  const ab=open[1].firstElementChild;
-  if(ac.className === ab.className){
+  if(open[0].firstElementChild.className === open[1].firstElementChild.className){
     open[0].classList.add('match');
     open[1].classList.add('match');
     open=[];
+    matched+=1;
+    if(matched===8){
+      congrats();
+    }
   }
   else {
     open[0].classList.remove('match','show','open');
@@ -102,14 +115,33 @@ function cardMatch(){
   }
 }
 
+//function for number of moves and rating based on number of moves
 function countMoves(){
   count++;
   moves.textContent=count;
 }
 
 //@description Reset button
-restart.addEventListener('click',function(){
+restart.addEventListener('click',resetGame);
+function resetGame(){
   start();
   count=0;
   open=[];
-});
+  matched=0;
+}
+
+//@description Congratulations pop up
+function congrats(){
+    pop.style.display = "block";
+    movess.textContent=count
+}
+
+// When the user clicks on x, close the popup
+close.addEventListener('click',function(){
+    pop.style.display = "none";
+})
+//Functionality for playagain in pop-up
+document.querySelector('.popup-footer').addEventListener('click',function(){
+  resetGame()
+  pop.style.display = "none";
+})
