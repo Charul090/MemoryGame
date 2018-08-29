@@ -29,8 +29,8 @@ let pop = document.getElementById('pop');
 let close = document.querySelector('.close');
 //@description Accessing elemtent to display moves in POPUP
 let movess=document.querySelector('.moves-2');
-
-
+//@description Accessing star class
+let star=document.querySelectorAll('.fa-star');
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -118,7 +118,39 @@ function cardMatch(){
 //function for number of moves and rating based on number of moves
 function countMoves(){
   count++;
+  starRating();
   moves.textContent=count;
+}
+
+//Rating based on moves
+function starRating(){
+if(count<=20){
+  star[0].style.color="rgb(255, 168, 0)";
+  star[1].style.color="rgb(255, 168, 0)";
+  star[2].style.color="rgb(255, 168, 0)";
+}
+else if(21<count && count<=30){
+  star[0].style.color="rgb(255, 168, 0)";
+  star[1].style.color="rgb(255, 168, 0)";
+  star[2].style.color="#000000";
+
+}
+else if(31<=count && count<=35){
+  star[0].style.color="rgb(255, 168, 0)";
+  star[1].style.color="#000000";
+  star[2].style.color="#000000";
+}
+else{
+  zeroRating();
+}
+}
+
+//@description Zero stars function
+function zeroRating()
+{
+  star[0].style.color="#000000";
+  star[1].style.color="#000000";
+  star[2].style.color="#000000";
 }
 
 //@description Reset button
@@ -128,18 +160,19 @@ function resetGame(){
   count=0;
   open=[];
   matched=0;
+  zeroRating();
 }
 
 //@description Congratulations pop up
 function congrats(){
     pop.style.display = "block";
-    movess.textContent=count
+    movess.textContent=count;
 }
-
 // When the user clicks on x, close the popup
 close.addEventListener('click',function(){
     pop.style.display = "none";
 })
+
 //Functionality for playagain in pop-up
 document.querySelector('.popup-footer').addEventListener('click',function(){
   resetGame()

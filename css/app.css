@@ -86,8 +86,8 @@ h1 {
  */
 
 .score-panel {
-    text-align: left;
-    width: 345px;
+    text-align: center;
+    width: 501px;
     margin-bottom: 10px;
 }
 
@@ -95,7 +95,7 @@ h1 {
     margin: 0;
     padding: 0;
     display: inline-block;
-    margin: 0 5px 0 0;
+    margin: 0 10px 0 0;
 }
 
 .score-panel .stars li {
@@ -108,6 +108,9 @@ h1 {
     cursor: pointer;
 }
 
+.time{
+  float:left;
+}
 /*
  * Styles for pop up
  *
@@ -116,7 +119,7 @@ h1 {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    padding-top: 150px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -133,7 +136,7 @@ h1 {
     margin: auto;
     padding: 0;
     border: 1px solid #888;
-    width: 80%;
+    width: 60%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
@@ -173,13 +176,13 @@ h1 {
     color: red;
     text-align: center;
     font-family: 'Indie Flower', cursive;
-    font-size: 6vw;
+    font-size: 3vw;
 }
 
 .popup-body {
   padding: 2px 16px;
   text-align: center;
-  font-size: 4vw;
+  font-size: 2vw;
   color: #67ee05;
 }
 
@@ -189,5 +192,5 @@ h1 {
     color:#740c77;
     text-align: center;
     cursor: pointer;
-    font-size: 4vw;
+    font-size: 2vw;
 }
