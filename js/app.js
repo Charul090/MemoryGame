@@ -14,7 +14,10 @@ let open=[];
 //@description Counting number of Moves
 let count=0;
 //@description Accessing element that displays number of moves made by user
-let moves=document.querySelector(".moves");
+let moves=document.querySelector('.moves');
+
+//@description Reset button
+let restart=document.querySelector('.restart');
 
 
 /*
@@ -35,6 +38,8 @@ function start(){
     q.remove('match','show','open');
     deck.appendChild(cards[i]);
   }
+  count=0;
+  moves.textContent=count;
 }
 
 //@description Shuffle function from http://stackoverflow.com/a/2450976
@@ -65,6 +70,7 @@ function shuffle(array) {
 
 //@description Eventlistener for card
 deck.addEventListener('click', openCard);
+
 
 //@Opening card logic
 function openCard(event){
@@ -100,3 +106,10 @@ function countMoves(){
   count++;
   moves.textContent=count;
 }
+
+//@description Reset button
+restart.addEventListener('click',function(){
+  start();
+  count=0;
+  open=[];
+});
