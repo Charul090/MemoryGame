@@ -10,7 +10,8 @@ let deck=document.querySelector('.deck')
 
 //@description list for all open cards
 let open=[];
-
+//@description list for all matched cards
+let disabled=[];
 //@description Counting number of Moves
 let count=0;
 //@description Accessing element that displays number of moves made by user
@@ -57,7 +58,7 @@ function start(){
 	shuffle(cards);
 	for(i=0;i<cards.length;i++){
 		const q =cards[i].classList;
-		q.remove('match','show','open');
+		q.remove('match','show','open','flip','zoom','shake');
 		deck.appendChild(cards[i]);
 	}
 	count=0;
@@ -97,13 +98,16 @@ deck.addEventListener('click', openCard);
 //@Opening card logic
 function openCard(event){
 	let ab=event.target;
-	if((ab.nodeName ==='LI')&&(open.length<2)&&(!open.includes(ab))){
+	if((ab.nodeName ==='LI')&&(open.length<2)&&(!open.includes(ab))&&(!disabled.includes(ab))){
 		ab.classList.add('open','show');
 		open.push(ab);
 		countMoves();
 	}
+	if(open.length===1) {
+		open[0].classList.toggle('flip');
+	}
 	if(open.length===2){
-		setTimeout(cardMatch,500);
+		setTimeout(cardMatch,250);
 	}
 
 }
@@ -111,8 +115,10 @@ function openCard(event){
 //@description If cards matches or not checking functionality
 function cardMatch(){
 	if(open[0].firstElementChild.className === open[1].firstElementChild.className) {
-		open[0].classList.add('match');
-		open[1].classList.add('match');
+		open[0].classList.add('match','zoom');
+		open[1].classList.add('match','zoom');
+		disabled.push(open[0]);
+		disabled.push(open[1]);
 		open=[];
 		matched+=1;
 		if(matched===8){
@@ -121,12 +127,21 @@ function cardMatch(){
 		}
 	}
 	else {
-		open[0].classList.remove('match','show','open');
-		open[1].classList.remove('match','show','open');
-		open=[];
+		open[0].classList.remove('flip');
+		open[0].classList.add('shake');
+		open[1].classList.add('shake');
+		setTimeout(cardMismatch,1000);
+
 	}
 }
-
+//@description To animate mismatched cards
+function cardMismatch(){
+open[0].classList.remove('match','show','open');
+open[1].classList.remove('match','show','open');
+open[0].classList.remove('shake','flip');
+open[1].classList.remove('shake','flip');
+open=[];
+}
 //function for number of moves and rating based on number of moves
 function countMoves(){
 	count++;

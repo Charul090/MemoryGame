@@ -204,3 +204,62 @@ h1 {
 		cursor: pointer;
 		font-size: 2vw;
 }
+
+/*
+*Animation for cards
+*
+*/
+@keyframes exampleflip{
+	from {
+    transform: rotateY(180deg);
+  } to {
+    transform: rotateY(0deg);
+  }
+}
+
+.flip{
+	animation-name: exampleflip;
+	animation-duration: 1s;
+	animation-iteration-count: 1;
+	animation-timing-function:ease-in-out;
+}
+
+@keyframes examplezoom{
+		0% {
+        transform: scale(1,1);
+    }
+    50% {
+        transform: scale(1.2,1.2);
+    }
+    100% {
+        transform: scale(1,1);
+    }
+}
+
+.zoom{
+	animation-name: examplezoom;
+	animation-duration: 1s;
+	animation-iteration-count: 1;
+	animation-timing-function:ease-out;
+}
+
+@keyframes exampleshake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-3px, -4px) rotate(-10deg); }
+    20% { transform: translate(-5px, -2px) rotate(10deg); }
+    30% { transform: translate(6px, 4px) rotate(0deg); }
+    40% { transform: translate(2px, 0px) rotate(10deg); }
+    50% { transform: translate(-3px, 0px) rotate(-10deg); }
+    60% { transform: translate(-1px, 3px) rotate(8deg); }
+    70% { transform: translate(6px, 4px) rotate(-8deg); }
+    80% { transform: translate(-3px, -3px) rotate(6deg); }
+    90% { transform: translate(2px, 4px) rotate(0deg); }
+    100% { transform: translate(0px,-3px) rotate(-10deg); }
+}
+
+.shake{
+	animation-name: exampleshake;
+	animation-duration: 0.5s;
+	animation-iteration-count: 1;
+	animation-timing-function:linear;
+}
