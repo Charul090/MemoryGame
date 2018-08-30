@@ -1,36 +1,45 @@
 html {
-    box-sizing: border-box;
+		box-sizing: border-box;
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: inherit;
+		box-sizing: inherit;
 }
 
 html,
 body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
 }
 
 body {
-    background: #ffffff url('../img/background.jpg'); /* Background pattern from Subtle Patterns */
-    font-family: 'Coda', cursive;
+		background: #ffffff url('../img/background.jpg'); /* Background pattern from Subtle Patterns */
+		font-family: 'Coda', cursive;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+
 }
 
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
 }
 
 h1 {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
+		font-family: 'Open Sans', sans-serif;
+		font-weight: 300;
+		font-family: 'Yellowtail', cursive;
+		font-size: 6em;
+		margin: 33px 0 6px 0;
+		text-decoration: underline;
+			text-decoration-color: red;
 }
 
 /*
@@ -38,48 +47,48 @@ h1 {
  */
 
 .deck {
-    width: 660px;
-    min-height: 680px;
-    background: linear-gradient(160deg, #464866 0%, #25274D 100%);
-    padding: 32px;
-    border-radius: 10px;
-    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 0 3em;
+		width: 660px;
+		min-height: 680px;
+		background: linear-gradient(160deg, #464866 0%, #25274D 100%);
+		padding: 32px;
+		border-radius: 10px;
+		box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: center;
+		margin: 0 0 3em;
 }
 
 .deck .card {
-    height: 125px;
-    width: 125px;
-    background-color: rgba(170, 171, 184, 0.61);
-    font-size: 0;
-    color: #ffffff;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
-    background-image: url('../img/brushed-alum-dark.png');
+		height: 125px;
+		width: 125px;
+		background-color: rgba(170, 171, 184, 0.61);
+		font-size: 0;
+		color: #ffffff;
+		border-radius: 8px;
+		cursor: pointer;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+		background-image: url('../img/brushed-alum-dark.png');
 }
 
 .deck .card.open {
-    transform: rotateY(0);
-    background:#2E9CCA;
-    cursor: default;
+		transform: rotateY(0);
+		background:#2E9CCA;
+		cursor: default;
 }
 
 .deck .card.show {
-    font-size: 33px;
+		font-size: 33px;
 }
 
 .deck .card.match {
-    cursor: default;
-    background:#9a1750;
-    font-size: 33px;
+		cursor: default;
+		background:#9a1750;
+		font-size: 33px;
 }
 
 /*
@@ -87,111 +96,111 @@ h1 {
  */
 
 .score-panel {
-    text-align: center;
-    width: 501px;
-    margin-bottom: 10px;
+		text-align: center;
+		width: 501px;
+		margin-bottom: 10px;
 }
 
 .score-panel .stars {
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-    margin: 0 10px 0 0;
+		margin: 0;
+		padding: 0;
+		display: inline-block;
+		margin: 0 10px 0 0;
 }
 
 .score-panel .stars li {
-    list-style: none;
-    display: inline-block;
+		list-style: none;
+		display: inline-block;
 }
 
 .score-panel .restart {
-    float: right;
-    cursor: pointer;
+		float: right;
+		cursor: pointer;
 }
 
-.time{
-  float:left;
+.timer{
+	float:left;
 }
 /*
  * Styles for pop up
  *
  */
  .popup {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 150px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+		display: none; /* Hidden by default */
+		position: fixed; /* Stay in place */
+		z-index: 1; /* Sit on top */
+		padding-top: 33vh; /* Location of the box */
+		left: 0;
+		top: 0;
+		width: 100%; /* Full width */
+		height: 100%; /* Full height */
+		overflow: auto; /* Enable scroll if needed */
+		background-color: rgb(0,0,0); /* Fallback color */
+		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
 /* Modal Content */
 .popup-content {
-    position: relative;
-    background-color: #fefefe;
-    margin: auto;
-    padding: 0;
-    border: 1px solid #888;
-    width: 60%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s
+		position: relative;
+		background-color: #fefefe;
+		margin: auto;
+		padding: 0;
+		border: 1px solid #888;
+		width: 60%;
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+		-webkit-animation-name: animatetop;
+		-webkit-animation-duration: 0.4s;
+		animation-name: animatetop;
+		animation-duration: 0.4s
 }
 
 /* Add Animation */
 @-webkit-keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
+		from {top:-300px; opacity:0}
+		to {top:0; opacity:1}
 }
 
 @keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
+		from {top:-300px; opacity:0}
+		to {top:0; opacity:1}
 }
 
 /* The Close Button */
 .close {
-    color: grey;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+		color: grey;
+		float: right;
+		font-size: 28px;
+		font-weight: bold;
 }
 
 .close:hover,
 .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
+		color: #000;
+		text-decoration: none;
+		cursor: pointer;
 }
 
 .popup-header {
-    padding: 2px 16px;
-    background-color: #ffffff;
-    color: red;
-    text-align: center;
-    font-family: 'Indie Flower', cursive;
-    font-size: 3vw;
+		padding: 2px 16px;
+		background-color: #ffffff;
+		color: red;
+		text-align: center;
+		font-family: 'Indie Flower', cursive;
+		font-size: 3vw;
 }
 
 .popup-body {
-  padding: 2px 16px;
-  text-align: center;
-  font-size: 2vw;
-  color: #67ee05;
+	padding: 2px 16px;
+	text-align: center;
+	font-size: 2vw;
+	color: #67ee05;
 }
 
 .popup-footer {
-    padding: 2px 16px;
-    background-color: #ffffff;
-    color:#740c77;
-    text-align: center;
-    cursor: pointer;
-    font-size: 2vw;
+		padding: 2px 16px;
+		background-color: #ffffff;
+		color:#740c77;
+		text-align: center;
+		cursor: pointer;
+		font-size: 2vw;
 }

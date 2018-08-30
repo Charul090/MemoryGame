@@ -32,6 +32,15 @@ let movess=document.querySelector('.moves-2');
 //@description Accessing star class
 let star=document.querySelectorAll('.fa-star');
 let stars=0;
+//@description variables for TIMER
+let second = 0
+let minute = 0
+let hour = 0;
+let time = document.querySelector('.time');
+let interval;
+let timess=document.querySelector('.timess')
+
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -44,29 +53,29 @@ document.body.onload=start();
 
 //@description Cards shuffling logic
 function start(){
-  shuffle(cards);
-  for(i=0;i<cards.length;i++){
-    const q =cards[i].classList;
-    q.remove('match','show','open');
-    deck.appendChild(cards[i]);
-  }
-  count=0;
-  moves.textContent=count;
+	shuffle(cards);
+	for(i=0;i<cards.length;i++){
+		const q =cards[i].classList;
+		q.remove('match','show','open');
+		deck.appendChild(cards[i]);
+	}
+	count=0;
+	moves.textContent=count;
 }
 
 //@description Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+		var currentIndex = array.length, temporaryValue, randomIndex;
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
+		while (currentIndex !== 0) {
+				randomIndex = Math.floor(Math.random() * currentIndex);
+				currentIndex -= 1;
+				temporaryValue = array[currentIndex];
+				array[currentIndex] = array[randomIndex];
+				array[randomIndex] = temporaryValue;
+		}
 
-    return array;
+		return array;
 }
 
 /*
@@ -86,95 +95,126 @@ deck.addEventListener('click', openCard);
 
 //@Opening card logic
 function openCard(event){
-  let ab=event.target;
-  if((ab.nodeName ==='LI')&&(open.length<2)&&(!open.includes(ab))){
-    ab.classList.add('open','show');
-    open.push(ab);
-    countMoves();
-  }
-  if(open.length===2){
-    setTimeout(cardMatch,500);
-  }
+	let ab=event.target;
+	if((ab.nodeName ==='LI')&&(open.length<2)&&(!open.includes(ab))){
+		ab.classList.add('open','show');
+		open.push(ab);
+		countMoves();
+	}
+	if(open.length===2){
+		setTimeout(cardMatch,500);
+	}
 
 }
 
 //@description If cards matches or not checking functionality
 function cardMatch(){
-  if(open[0].firstElementChild.className === open[1].firstElementChild.className){
-    open[0].classList.add('match');
-    open[1].classList.add('match');
-    open=[];
-    matched+=1;
-    if(matched===8){
-      congrats();
-    }
-  }
-  else {
-    open[0].classList.remove('match','show','open');
-    open[1].classList.remove('match','show','open');
-    open=[];
-  }
+	if(open[0].firstElementChild.className === open[1].firstElementChild.className){
+		open[0].classList.add('match');
+		open[1].classList.add('match');
+		open=[];
+		matched+=1;
+		if(matched===8){
+			clearInterval(interval);
+			congrats();
+		}
+	}
+	else {
+		open[0].classList.remove('match','show','open');
+		open[1].classList.remove('match','show','open');
+		open=[];
+	}
 }
 
 //function for number of moves and rating based on number of moves
 function countMoves(){
-  count++;
-  starRating();
-  moves.textContent=count;
+	count++;
+	if(count===2){
+	startTimer();
+	}
+	starRating();
+	moves.textContent=count;
 }
 
 //Rating based on moves
 function starRating(){
 if(count<=20){
-  star[0].style.color="rgb(255, 168, 0)";
-  star[1].style.color="rgb(255, 168, 0)";
-  star[2].style.color="rgb(255, 168, 0)";
+	star[0].style.color="rgb(255, 168, 0)";
+	star[1].style.color="rgb(255, 168, 0)";
+	star[2].style.color="rgb(255, 168, 0)";
 }
 else if(21<count && count<=30){
-  star[0].style.color="rgb(255, 168, 0)";
-  star[1].style.color="rgb(255, 168, 0)";
-  star[2].style.color="#000000";
+	star[0].style.color="rgb(255, 168, 0)";
+	star[1].style.color="rgb(255, 168, 0)";
+	star[2].style.color="#000000";
 }
 else if(31<=count && count<=35){
-  star[0].style.color="rgb(255, 168, 0)";
-  star[1].style.color="#000000";
-  star[2].style.color="#000000";
+	star[0].style.color="rgb(255, 168, 0)";
+	star[1].style.color="#000000";
+	star[2].style.color="#000000";
 }
 else{
-  zeroRating();
+	zeroRating();
 }
 }
 
 //@description Zero stars function
 function zeroRating()
 {
-  star[0].style.color="#000000";
-  star[1].style.color="#000000";
-  star[2].style.color="#000000";
+	star[0].style.color="#000000";
+	star[1].style.color="#000000";
+	star[2].style.color="#000000";
 }
 
 //@description Reset button
 restart.addEventListener('click',resetGame);
 function resetGame(){
-  start();
-  count=0;
-  open=[];
-  matched=0;
-  zeroRating();
+	start();
+	count=0;
+	open=[];
+	matched=0;
+	zeroRating();
+	resetTimer();
 }
 
 //@description Congratulations pop up
 function congrats(){
-    pop.style.display = "block";
-    movess.textContent=count;
+		pop.style.display = "block";
+		movess.textContent=count;
+		timess.textContent=time.innerHTML;
 }
 // When the user clicks on x, close the popup
 close.addEventListener('click',function(){
-    pop.style.display = "none";
+		pop.style.display = "none";
 })
 
 //Functionality for playagain in pop-up
 document.querySelector('.popup-footer').addEventListener('click',function(){
-  resetGame()
-  pop.style.display = "none";
+	resetGame();
+	pop.style.display = "none";
 })
+
+// @description function for starting tIMER
+function startTimer(){
+		interval = setInterval(function(){
+				time.innerHTML = minute+":"+second ;
+				second++;
+				if(second == 60){
+						minute++;
+						second=0;
+				}
+				if(minute == 60){
+						hour++;
+						minute = 0;
+				}
+		},1000);
+}
+// @description function for reseting tIMER
+function resetTimer(){
+	clearInterval(interval);
+	second = 0;
+	minute = 0;
+	hour = 0;
+	var timer = document.querySelector(".timer");
+		time.innerHTML = "";
+}
