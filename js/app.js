@@ -31,6 +31,7 @@ let close = document.querySelector('.close');
 let movess=document.querySelector('.moves-2');
 //@description Accessing star class
 let star=document.querySelectorAll('.fa-star');
+let stars=0;
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -92,7 +93,7 @@ function openCard(event){
     countMoves();
   }
   if(open.length===2){
-    cardMatch();
+    setTimeout(cardMatch,500);
   }
 
 }
@@ -133,7 +134,6 @@ else if(21<count && count<=30){
   star[0].style.color="rgb(255, 168, 0)";
   star[1].style.color="rgb(255, 168, 0)";
   star[2].style.color="#000000";
-
 }
 else if(31<=count && count<=35){
   star[0].style.color="rgb(255, 168, 0)";
