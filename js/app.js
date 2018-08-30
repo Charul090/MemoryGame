@@ -107,6 +107,7 @@ function openCard(event){
 		open[0].classList.toggle('flip');
 	}
 	if(open.length===2){
+		open[1].classList.toggle('flip');
 		setTimeout(cardMatch,250);
 	}
 

@@ -216,12 +216,22 @@ h1 {
 		transform: rotateY(0deg);
 	}
 }
-
+@keyframes fadein {
+    0%{
+			opacity: 0;
+		}
+		50%{
+			opacity: 0.25;
+		}
+    100% {
+			opacity: 1;
+		}
+}
 .flip{
-	animation-name: exampleflip;
-	animation-duration: 1s;
+	animation-name: exampleflip,fadein;
+	animation-duration: 0.25s;
 	animation-iteration-count: 1;
-	animation-timing-function:ease-in-out;
+	animation-timing-function:linear;
 }
 
 @keyframes examplezoom{
@@ -238,9 +248,9 @@ h1 {
 
 .zoom{
 	animation-name: examplezoom;
-	animation-duration: 1s;
+	animation-duration: 0.5s;
 	animation-iteration-count: 1;
-	animation-timing-function:ease-out;
+	animation-timing-function:ease-in;
 }
 
 @keyframes exampleshake {
