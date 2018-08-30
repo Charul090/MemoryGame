@@ -31,7 +31,8 @@ let close = document.querySelector('.close');
 let movess=document.querySelector('.moves-2');
 //@description Accessing star class
 let star=document.querySelectorAll('.fa-star');
-let stars=0;
+let starz=document.querySelector('.starz');
+let stars=document.querySelector('.stars');
 //@description variables for TIMER
 let second = 0
 let minute = 0
@@ -109,7 +110,7 @@ function openCard(event){
 
 //@description If cards matches or not checking functionality
 function cardMatch(){
-	if(open[0].firstElementChild.className === open[1].firstElementChild.className){
+	if(open[0].firstElementChild.className === open[1].firstElementChild.className) {
 		open[0].classList.add('match');
 		open[1].classList.add('match');
 		open=[];
@@ -138,17 +139,17 @@ function countMoves(){
 
 //Rating based on moves
 function starRating(){
-if(count<=20){
+if(count<=26){
 	star[0].style.color="rgb(255, 168, 0)";
 	star[1].style.color="rgb(255, 168, 0)";
 	star[2].style.color="rgb(255, 168, 0)";
 }
-else if(21<count && count<=30){
+else if(27<count && count<=33){
 	star[0].style.color="rgb(255, 168, 0)";
 	star[1].style.color="rgb(255, 168, 0)";
 	star[2].style.color="#000000";
 }
-else if(31<=count && count<=35){
+else if(34<=count && count<=38){
 	star[0].style.color="rgb(255, 168, 0)";
 	star[1].style.color="#000000";
 	star[2].style.color="#000000";
@@ -182,6 +183,18 @@ function congrats(){
 		pop.style.display = "block";
 		movess.textContent=count;
 		timess.textContent=time.innerHTML;
+		if(count<=26){
+			starz.innerHTML=stars.firstElementChild.innerHTML+stars.firstElementChild.innerHTML+stars.firstElementChild.innerHTML;
+		}
+		else if(27<count && count<=33){
+			starz.innerHTML=stars.firstElementChild.innerHTML+stars.firstElementChild.innerHTML;
+		}
+		else if(34<=count && count<=38){
+			starz.innerHTML=stars.firstElementChild.innerHTML;
+		}
+		else{
+			starz.innerHTML="";
+		}
 }
 // When the user clicks on x, close the popup
 close.addEventListener('click',function(){
