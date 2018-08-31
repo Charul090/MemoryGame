@@ -25,7 +25,7 @@ let matched=0;
 
 //@description To access popup
 let pop = document.getElementById('pop');
-
+let playagain=document.querySelector('.playagain');
 //@description To access x that closes the popup
 let close = document.querySelector('.close');
 //@description Accessing elemtent to display moves in POPUP
@@ -63,6 +63,7 @@ function start(){
 	}
 	count=0;
 	moves.textContent=count;
+	enableClick();
 }
 
 //@description Shuffle function from http://stackoverflow.com/a/2450976
@@ -92,8 +93,13 @@ function shuffle(array) {
  */
 
 //@description Eventlistener for card
+function enableClick(){
 deck.addEventListener('click', openCard);
+}
 
+function disableClick(){
+deck.removeEventListener('click', openCard);
+}
 
 //@Opening card logic
 function openCard(event){
@@ -108,6 +114,7 @@ function openCard(event){
 	}
 	if(open.length===2){
 		open[1].classList.toggle('flip');
+		disableClick();
 		setTimeout(cardMatch,250);
 	}
 
@@ -115,7 +122,7 @@ function openCard(event){
 
 //@description If cards matches or not checking functionality
 function cardMatch(){
-	if((open[0].firstElementChild.className)===(open[1].firstElementChild.className)) {
+	if(open[0].firstElementChild.className === open[1].firstElementChild.className) {
 		open[0].classList.add('match','zoom');
 		open[1].classList.add('match','zoom');
 		disabled.push(open[0]);
@@ -126,13 +133,13 @@ function cardMatch(){
 			clearInterval(interval);
 			congrats();
 		}
+		enableClick();
 	}
 	else {
 		open[0].classList.remove('flip');
 		open[0].classList.add('shake');
 		open[1].classList.add('shake');
-		setTimeout(cardMismatch,1000);
-
+		setTimeout(cardMismatch,500);
 	}
 }
 //@description To animate mismatched cards
@@ -142,6 +149,7 @@ open[1].classList.remove('match','show','open');
 open[0].classList.remove('shake','flip');
 open[1].classList.remove('shake','flip');
 open=[];
+enableClick();
 }
 //function for number of moves and rating based on number of moves
 function countMoves(){
@@ -182,10 +190,12 @@ function zeroRating()
 
 //@description Reset button
 restart.addEventListener('click',resetGame);
+
 function resetGame(){
 	start();
 	count=0;
 	open=[];
+	disabled=[];
 	matched=0;
 	zeroRating();
 	resetTimer();
@@ -209,14 +219,15 @@ function congrats(){
 // When the user clicks on x, close the popup
 close.addEventListener('click',function(){
 		pop.style.display = "none";
-})
+});
 
 //Functionality for playagain in pop-up
-document.querySelector('.popup-footer').addEventListener('click',function(){
-	resetGame();
-	pop.style.display = "none";
-})
+playagain.addEventListener('click',popAgain);
 
+function popAgain(){
+	pop.style.display = "none";
+	resetGame();
+}
 // @description function for starting tIMER
 function startTimer(){
 		interval = setInterval(function(){
