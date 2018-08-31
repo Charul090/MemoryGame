@@ -115,7 +115,7 @@ function openCard(event){
 
 //@description If cards matches or not checking functionality
 function cardMatch(){
-	if(open[0].firstElementChild.className === open[1].firstElementChild.className) {
+	if((open[0].firstElementChild.className)===(open[1].firstElementChild.className)) {
 		open[0].classList.add('match','zoom');
 		open[1].classList.add('match','zoom');
 		disabled.push(open[0]);
@@ -155,23 +155,20 @@ function countMoves(){
 
 //Rating based on moves
 function starRating(){
-if(count<=26){
+if(count<=30){
 	star[0].style.color="rgb(255, 168, 0)";
 	star[1].style.color="rgb(255, 168, 0)";
 	star[2].style.color="rgb(255, 168, 0)";
 }
-else if(27<count && count<=33){
+else if(30<count && count<=36){
 	star[0].style.color="rgb(255, 168, 0)";
 	star[1].style.color="rgb(255, 168, 0)";
 	star[2].style.color="#000000";
 }
-else if(34<=count && count<=38){
+else {
 	star[0].style.color="rgb(255, 168, 0)";
 	star[1].style.color="#000000";
 	star[2].style.color="#000000";
-}
-else{
-	zeroRating();
 }
 }
 
@@ -199,17 +196,14 @@ function congrats(){
 		pop.style.display = "block";
 		movess.textContent=count;
 		timess.textContent=time.innerHTML;
-		if(count<=26){
+		if(count<=30){
 			starz.innerHTML=stars.firstElementChild.innerHTML+stars.firstElementChild.innerHTML+stars.firstElementChild.innerHTML;
 		}
-		else if(27<count && count<=33){
+		else if(31<count && count<=36){
 			starz.innerHTML=stars.firstElementChild.innerHTML+stars.firstElementChild.innerHTML;
 		}
-		else if(34<=count && count<=38){
-			starz.innerHTML=stars.firstElementChild.innerHTML;
-		}
 		else{
-			starz.innerHTML="";
+			starz.innerHTML=stars.firstElementChild.innerHTML;
 		}
 }
 // When the user clicks on x, close the popup
